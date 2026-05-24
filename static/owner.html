@@ -4,70 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Миний самбар — Аварзэд</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Аварзэд — Самбар</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;font-family:'Inter',-apple-system,sans-serif;background:#f5f4f0;-webkit-font-smoothing:antialiased;}
-.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2rem 1.25rem;}
-.card{background:#fff;border-radius:24px;width:100%;max-width:360px;padding:1.75rem;box-shadow:0 2px 24px rgba(83,74,183,.08),0 0 0 0.5px rgba(83,74,183,.10);margin-bottom:1rem;}
-.owner-head{display:flex;align-items:center;gap:14px;margin-bottom:1.5rem;}
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem 1.25rem;}
+.card{background:#fff;border-radius:24px;width:100%;max-width:360px;padding:1.5rem;box-shadow:0 2px 24px rgba(83,74,183,.08),0 0 0 0.5px rgba(83,74,183,.10);margin-bottom:1rem;}
+.owner-head{display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;}
 .av{width:52px;height:52px;border-radius:50%;background:#EEEDFE;border:2px solid #AFA9EC;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#3C3489;flex-shrink:0;}
 .owner-head h2{font-size:17px;font-weight:700;color:#111;margin-bottom:2px;}
 .owner-head p{font-size:13px;color:#888780;}
-.conn-row{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;font-size:13px;font-weight:500;margin-bottom:1.25rem;}
+.conn-row{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;font-size:13px;font-weight:500;margin-bottom:1rem;}
 .conn-on{background:#EAF3DE;color:#3B6D11;}
 .conn-off{background:#FCEBEB;color:#A32D2D;}
 .conn-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .don{background:#639922;}.doff{background:#E24B4A;}
-.notif-perm{background:#FAEEDA;color:#854F0B;padding:10px 14px;border-radius:12px;font-size:12px;line-height:1.5;margin-bottom:1rem;display:none;}
-.notif-perm button{background:#BA7517;color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;margin-top:6px;display:block;}
-
-.ring-notif{
-  position:fixed;top:0;left:0;right:0;
-  background:#26215C;
-  transform:translateY(-100%);
-  transition:transform .35s cubic-bezier(.4,0,.2,1);
-  border-bottom-left-radius:20px;border-bottom-right-radius:20px;
-  z-index:9999;overflow:hidden;
-  box-shadow:0 6px 32px rgba(38,33,92,.3);
-}
-.ring-notif.show{transform:translateY(0);}
-.ring-accent{height:4px;background:#7F77DD;}
-.ring-body{padding:16px 18px 18px;}
-.ring-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
-.ring-sub{font-size:12px;color:#CECBF6;margin-bottom:14px;}
-.ring-btns{display:flex;gap:8px;}
-.ring-btn{flex:1;padding:11px 0;border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:opacity .15s;-webkit-tap-highlight-color:transparent;}
-.ring-btn:active{opacity:.75;}
-.rbyes{background:#fff;color:#26215C;}
-.rbno{background:rgba(255,255,255,.12);color:#fff;}
-
-.history-title{font-size:13px;font-weight:600;color:#888780;margin-bottom:10px;letter-spacing:.04em;text-transform:uppercase;}
+.history-title{font-size:12px;font-weight:600;color:#888780;margin-bottom:10px;letter-spacing:.05em;text-transform:uppercase;}
 .hist-empty{font-size:14px;color:#B4B2A9;text-align:center;padding:20px 0;}
 .hist-item{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#faf9f6;border-radius:12px;margin-bottom:8px;}
 .hist-name{font-size:14px;font-weight:500;color:#111;}
 .hist-time{font-size:12px;color:#888780;}
-.hist-reply{font-size:11px;font-weight:600;padding:3px 9px;border-radius:10px;margin-left:8px;}
-.rep-yes{background:#EAF3DE;color:#3B6D11;}
-.rep-no{background:#FCEBEB;color:#A32D2D;}
-.rep-wait{background:#EEEDFE;color:#534AB7;}
+.rep-wait{background:#EEEDFE;color:#534AB7;font-size:11px;font-weight:600;padding:3px 9px;border-radius:10px;}
+.rep-yes{background:#EAF3DE;color:#3B6D11;font-size:11px;font-weight:600;padding:3px 9px;border-radius:10px;}
+.rep-no{background:#FCEBEB;color:#A32D2D;font-size:11px;font-weight:600;padding:3px 9px;border-radius:10px;}
 
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(60px);background:#26215C;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;transition:transform .3s ease;z-index:9998;white-space:nowrap;}
+.notif-bar{
+  position:fixed;top:0;left:0;right:0;
+  background:#26215C;
+  transform:translateY(-110%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  border-bottom-left-radius:20px;border-bottom-right-radius:20px;
+  z-index:9999;
+  box-shadow:0 6px 32px rgba(38,33,92,.35);
+}
+.notif-bar.show{transform:translateY(0);}
+.notif-accent{height:4px;background:#7F77DD;}
+.notif-body{padding:16px 18px 18px;}
+.notif-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:3px;}
+.notif-sub{font-size:13px;color:#CECBF6;margin-bottom:14px;}
+.notif-btns{display:flex;gap:8px;}
+.notif-btn{flex:1;padding:12px 0;border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.notif-btn:active{opacity:.75;}
+.nbyes{background:#fff;color:#26215C;}
+.nbno{background:rgba(255,255,255,.15);color:#fff;}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(70px);background:#26215C;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;transition:transform .3s;z-index:9998;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
-
-<div class="ring-notif" id="ringBar">
-  <div class="ring-accent"></div>
-  <div class="ring-body">
-    <div class="ring-title">📦 Дуудлага ирлээ!</div>
-    <div class="ring-sub" id="ringSub">Үйлчлүүлэгч таныг дуудаж байна</div>
-    <div class="ring-btns">
-      <button class="ring-btn rbyes" onclick="sendReply(true)">✓ Боломжтой</button>
-      <button class="ring-btn rbno" onclick="sendReply(false)">✕ Боломжгүй</button>
+<div class="notif-bar" id="notifBar">
+  <div class="notif-accent"></div>
+  <div class="notif-body">
+    <div class="notif-title">📦 Дуудлага ирлээ!</div>
+    <div class="notif-sub" id="notifSub">Үйлчлүүлэгч таныг дуудаж байна</div>
+    <div class="notif-btns">
+      <button class="notif-btn nbyes" onclick="sendReply(true)">✓ Боломжтой</button>
+      <button class="notif-btn nbno" onclick="sendReply(false)">✕ Боломжгүй</button>
     </div>
   </div>
 </div>
@@ -81,17 +75,10 @@ html,body{height:100%;font-family:'Inter',-apple-system,sans-serif;background:#f
         <p>Хүргэлтийн самбар</p>
       </div>
     </div>
-
-    <div class="conn-row conn-off" id="connRow">
-      <span class="conn-dot doff" id="connDot"></span>
-      <span id="connTxt">Холбогдож байна...</span>
+    <div class="conn-row conn-on" id="connRow">
+      <span class="conn-dot don" id="connDot"></span>
+      <span id="connTxt">Дуудлага хүлээж байна...</span>
     </div>
-
-    <div class="notif-perm" id="permBox">
-      Дуу болон мэдэгдэл авахын тулд зөвшөөрөл өгнө үү
-      <button onclick="reqPerm()">Зөвшөөрөл өгөх</button>
-    </div>
-
     <div class="history-title">Дуудлагын түүх</div>
     <div id="histList"><div class="hist-empty">Одоогоор дуудлага байхгүй</div></div>
   </div>
@@ -100,95 +87,67 @@ html,body{height:100%;font-family:'Inter',-apple-system,sans-serif;background:#f
 <div class="toast" id="toast"></div>
 
 <script>
-var TOKEN = 'avarzed2024';
+var lastTs = Date.now();
 var history = [];
 var lastRing = null;
-var es = null;
+var polling = true;
 
 function fmt(ts){
-  var d=new Date(ts*1000);
+  var d=new Date(ts);
   return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
 }
 
-function playSound(type){
+function playSound(){
   try{
     var ctx=new(window.AudioContext||window.webkitAudioContext)();
-    if(type==='ring'){
-      [[523,0],[659,.2],[784,.4],[659,.6],[784,.8]].forEach(function(p){
-        var o=ctx.createOscillator(),g=ctx.createGain();
-        o.connect(g);g.connect(ctx.destination);
-        o.type='sine';o.frequency.value=p[0];
-        var t=ctx.currentTime+p[1];
-        g.gain.setValueAtTime(0,t);
-        g.gain.linearRampToValueAtTime(0.3,t+0.05);
-        g.gain.exponentialRampToValueAtTime(0.001,t+0.22);
-        o.start(t);o.stop(t+0.25);
-      });
-    } else {
+    [[523,0],[659,.2],[784,.4],[659,.55],[784,.7]].forEach(function(p){
       var o=ctx.createOscillator(),g=ctx.createGain();
       o.connect(g);g.connect(ctx.destination);
-      o.type='sine';o.frequency.value=type==='yes'?880:440;
-      g.gain.setValueAtTime(0.2,ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.18);
-      o.start();o.stop(ctx.currentTime+0.2);
-    }
+      o.type='sine';o.frequency.value=p[0];
+      var t=ctx.currentTime+p[1];
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(0.3,t+0.05);
+      g.gain.exponentialRampToValueAtTime(0.001,t+0.22);
+      o.start(t);o.stop(t+0.25);
+    });
   }catch(e){}
 }
 
-function showRingBar(event){
+function showNotif(event){
   lastRing=event;
-  var sub=fmt(event.ts)+' — '+event.name+' таныг дуудаж байна';
-  document.getElementById('ringSub').textContent=sub;
-  document.getElementById('ringBar').classList.add('show');
-}
-
-function hideRingBar(){
-  document.getElementById('ringBar').classList.remove('show');
-}
-
-function sendReply(ok){
-  hideRingBar();
-  playSound(ok?'yes':'no');
-  showToast(ok?'✓ "Боломжтой" гэж илгээлээ':'✕ "Боломжгүй" гэж илгээлээ');
-  var name=lastRing?lastRing.name:'Үйлчлүүлэгч';
-  fetch('/reply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ok:ok,name:name})});
-  if(lastRing){
-    lastRing.replied=ok;
-    renderHistory();
+  document.getElementById('notifSub').textContent=fmt(event.ts)+' — '+event.name+' таныг дуудаж байна';
+  document.getElementById('notifBar').classList.add('show');
+  if('Notification' in window && Notification.permission==='granted'){
+    new Notification('📦 Дуудлага ирлээ!',{body:event.name+' таныг дуудаж байна',requireInteraction:true});
   }
 }
 
-function addToHistory(event){
-  history.unshift(event);
-  if(history.length>20)history.pop();
-  renderHistory();
+function hideNotif(){
+  document.getElementById('notifBar').classList.remove('show');
+}
+
+function sendReply(ok){
+  hideNotif();
+  showToast(ok?'✓ Боломжтой гэж илгээлээ':'✕ Боломжгүй гэж илгээлээ');
+  var name=lastRing?lastRing.name:'Үйлчлүүлэгч';
+  fetch('/reply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ok:ok,name:name})});
+  if(lastRing){
+    for(var i=0;i<history.length;i++){
+      if(history[i].ts===lastRing.ts){history[i].replied=ok;break;}
+    }
+    renderHistory();
+  }
 }
 
 function renderHistory(){
   var el=document.getElementById('histList');
   if(!history.length){el.innerHTML='<div class="hist-empty">Одоогоор дуудлага байхгүй</div>';return;}
   el.innerHTML=history.map(function(h){
-    var rep='';
-    if(h.replied===true)rep='<span class="hist-reply rep-yes">Боломжтой</span>';
-    else if(h.replied===false)rep='<span class="hist-reply rep-no">Боломжгүй</span>';
-    else if(!h.reply)rep='<span class="hist-reply rep-wait">Хүлээж байна</span>';
-    return '<div class="hist-item"><div><div class="hist-name">'+h.name+'</div></div><div style="display:flex;align-items:center;">'+rep+'<span class="hist-time" style="margin-left:8px;">'+fmt(h.ts)+'</span></div></div>';
+    var rep='<span class="rep-wait">Хүлээж байна</span>';
+    if(h.replied===true)rep='<span class="rep-yes">Боломжтой</span>';
+    else if(h.replied===false)rep='<span class="rep-no">Боломжгүй</span>';
+    return '<div class="hist-item"><div class="hist-name">'+h.name+'</div><div style="display:flex;align-items:center;gap:8px;">'+rep+'<span class="hist-time">'+fmt(h.ts)+'</span></div></div>';
   }).join('');
-}
-
-function setConn(on){
-  var row=document.getElementById('connRow');
-  var dot=document.getElementById('connDot');
-  var txt=document.getElementById('connTxt');
-  if(on){
-    row.className='conn-row conn-on';
-    dot.className='conn-dot don';
-    txt.textContent='Холбогдсон — дуудлага хүлээж байна';
-  } else {
-    row.className='conn-row conn-off';
-    dot.className='conn-dot doff';
-    txt.textContent='Холбогдоогүй — дахин оролдож байна...';
-  }
 }
 
 function showToast(msg){
@@ -197,43 +156,44 @@ function showToast(msg){
   setTimeout(function(){t.classList.remove('show');},3000);
 }
 
-function reqPerm(){
-  if('Notification' in window){
-    Notification.requestPermission().then(function(p){
-      if(p==='granted')document.getElementById('permBox').style.display='none';
-    });
-  }
+function setConn(on){
+  var row=document.getElementById('connRow');
+  var dot=document.getElementById('connDot');
+  var txt=document.getElementById('connTxt');
+  row.className='conn-row '+(on?'conn-on':'conn-off');
+  dot.className='conn-dot '+(on?'don':'doff');
+  txt.textContent=on?'Дуудлага хүлээж байна...':'Холбогдоогүй — дахин оролдож байна...';
 }
 
-function connect(){
-  setConn(false);
-  es=new EventSource('/stream?token='+TOKEN);
-  es.onopen=function(){setConn(true);};
-  es.onmessage=function(e){
-    var data=JSON.parse(e.data);
-    if(data.ping)return;
-    if(data.reply)return;
-    playSound('ring');
-    showRingBar(data);
-    addToHistory(data);
-    if('Notification' in window && Notification.permission==='granted'){
-      new Notification('📦 Дуудлага ирлээ!',{body:data.name+' таныг дуудаж байна',requireInteraction:true});
+function doPoll(){
+  fetch('/poll?since='+lastTs)
+  .then(function(r){return r.json();})
+  .then(function(data){
+    setConn(true);
+    if(data.events && data.events.length>0){
+      data.events.forEach(function(e){
+        history.unshift(e);
+        playSound();
+        showNotif(e);
+      });
+      if(history.length>20)history=history.slice(0,20);
+      renderHistory();
+      lastTs=data.time;
+    } else {
+      lastTs=data.time;
     }
-  };
-  es.onerror=function(){
+  })
+  .catch(function(){
     setConn(false);
-    es.close();
-    setTimeout(connect,4000);
-  };
+  });
 }
 
 if('Notification' in window && Notification.permission==='default'){
-  document.getElementById('permBox').style.display='block';
-} else if('Notification' in window && Notification.permission==='granted'){
-  document.getElementById('permBox').style.display='none';
+  Notification.requestPermission();
 }
 
-connect();
+setInterval(doPoll, 2000);
+doPoll();
 </script>
 </body>
 </html>
