@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>А.Аварзэд — Хүргэлт</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;font-family:'Inter',-apple-system,sans-serif;background:#f5f4f0;color:#1a1a1a;-webkit-font-smoothing:antialiased;}
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.25rem;}
+.card{background:#fff;border-radius:24px;width:100%;max-width:360px;padding:2rem 1.75rem;box-shadow:0 2px 24px rgba(83,74,183,.08),0 0 0 0.5px rgba(83,74,183,.10);}
+.badge{display:inline-flex;align-items:center;gap:6px;background:#EEEDFE;color:#534AB7;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:5px 13px;border-radius:20px;margin-bottom:1.5rem;}
+.bdot{width:6px;height:6px;border-radius:50%;background:#7F77DD;}
+.hero{text-align:center;margin-bottom:1.75rem;}
+.av{width:80px;height:80px;border-radius:50%;background:#EEEDFE;border:2px solid #AFA9EC;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:26px;font-weight:700;color:#3C3489;}
+.hero h1{font-size:22px;font-weight:700;color:#111;margin-bottom:3px;}
+.hero .role{font-size:14px;color:#888780;}
+.divider{border:none;border-top:1px solid #f0eeea;margin:1.5rem 0;}
+.status-row{display:flex;align-items:center;justify-content:space-between;background:#faf9f6;border-radius:14px;padding:12px 16px;margin-bottom:1.5rem;}
+.slabel{font-size:13px;color:#888780;}
+.spill{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:20px;font-size:13px;font-weight:600;}
+.sdot{width:7px;height:7px;border-radius:50%;}
+.avail{background:#EAF3DE;color:#3B6D11;}.avail .sdot{background:#639922;}
+.busy{background:#FCEBEB;color:#A32D2D;}.busy .sdot{background:#E24B4A;}
+.cbtn{width:100%;padding:16px;border-radius:16px;background:#534AB7;color:#fff;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .15s,transform .1s;-webkit-tap-highlight-color:transparent;}
+.cbtn:hover{background:#3C3489;}
+.cbtn:active{transform:scale(0.97);}
+.cbtn:disabled{background:#D3D1C7;color:#888780;cursor:not-allowed;}
+.info{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;font-size:12px;color:#888780;}
+.toast{background:#26215C;color:#fff;text-align:center;padding:10px 18px;border-radius:20px;font-size:13px;font-weight:500;margin-top:1.25rem;display:none;}
+.toast.show{display:block;}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <div class="badge"><span class="bdot"></span>Хүргэлт</div>
+    <div class="hero">
+      <div class="av">АА</div>
+      <h1>А.Аварзэд</h1>
+      <div class="role">Хүргэлтийн ажилтан</div>
+    </div>
+    <hr class="divider">
+    <div class="status-row">
+      <span class="slabel">Байдал</span>
+      <span class="spill avail"><span class="sdot"></span>Завтай</span>
+    </div>
+    <button class="cbtn" id="btn" onclick="doRing()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      Дуудах
+    </button>
+    <div class="toast" id="toast"></div>
+    <div class="info">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Дуудлага хүргэлтийн ажилтанд очно
+    </div>
+  </div>
+</div>
+<script>
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},3000);
+}
+function doRing(){
+  var btn=document.getElementById('btn');
+  btn.disabled=true;
+  btn.textContent='Илгээж байна...';
+  fetch('/ring',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'Үйлчлүүлэгч'})})
+  .then(function(r){return r.json();})
+  .then(function(){
+    showToast('✓ Дуудлага илгээлээ!');
+    setTimeout(function(){btn.disabled=false;btn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Дуудах';},5000);
+  })
+  .catch(function(){
+    showToast('Алдаа гарлаа, дахин оролдоно уу');
+    btn.disabled=false;btn.textContent='Дуудах';
+  });
+}
+</script>
+</body>
+</html>
