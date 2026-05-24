@@ -4,7 +4,7 @@ import json, os, time
 from collections import deque
 
 app = Flask(__name__, static_folder='static')
-CORS(app)
+CORS(app, origins="*")
 
 events = deque(maxlen=100)
 replies = deque(maxlen=100)
@@ -17,22 +17,28 @@ def index():
 def owner():
     return send_from_directory('static', 'owner.html')
 
-@app.route('/ring', methods=['POST'])
+@app.route('/ring', methods=['POST', 'OPTIONS'])
 def ring():
+    if request.method == 'OPTIONS':
+        return '', 204
     data = request.json or {}
     name = data.get('name', 'Үйлчлүүлэгч')[:40]
     ts = int(time.time() * 1000)
-    events.appendleft({'name': name, 'ts': ts, 'id': ts})
+    events.appendleft({'name': name, 'ts': ts})
     return jsonify({'ok': True})
 
-@app.route('/poll')
+@app.route('/poll', methods=['GET', 'OPTIONS'])
 def poll():
+    if request.method == 'OPTIONS':
+        return '', 204
     since = int(request.args.get('since', 0))
     new_events = [e for e in events if e['ts'] > since]
     return jsonify({'events': new_events, 'time': int(time.time() * 1000)})
 
-@app.route('/reply', methods=['POST'])
+@app.route('/reply', methods=['POST', 'OPTIONS'])
 def reply_route():
+    if request.method == 'OPTIONS':
+        return '', 204
     data = request.json or {}
     ok = data.get('ok', False)
     name = data.get('name', 'Үйлчлүүлэгч')[:40]
@@ -40,11 +46,10 @@ def reply_route():
     replies.appendleft({'ok': ok, 'name': name, 'ts': ts})
     return jsonify({'ok': True})
 
-@app.route('/replies')
-def get_replies():
-    since = int(request.args.get('since', 0))
-    new_replies = [r for r in replies if r['ts'] > since]
-    return jsonify({'replies': new_replies, 'time': int(time.time() * 1000)})
+@app.route('/health')
+def health():
+    return jsonify({'status': 'ok'})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
